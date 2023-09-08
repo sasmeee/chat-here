@@ -144,7 +144,7 @@ const Chat = () => {
                 msg.user === auth.currentUser.displayName
                   ? "bg-blue-500 dark:bg-blue-700 duration-100"
                   : "bg-gray-200 dark:bg-gray-700 duration-100"
-              } rounded-lg p-2 min-w-[75px] max-w-[175px] md:max-w-[250px] break-all`}
+              } rounded-lg p-2 min-w-[75px] max-w-[200px] md:max-w-[250px] break-all`}
             >
               <p
                 className={`text-lg text-left ${
