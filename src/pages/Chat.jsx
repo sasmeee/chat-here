@@ -131,7 +131,7 @@ const Chat = () => {
                   msg.user === auth.currentUser.displayName
                     ? "bg-gray-200 text-gray-500 duration-100 dark:bg-gray-600 dark:text-gray-300"
                     : "bg-gray-200 text-gray-500 duration-100 dark:bg-gray-600 dark:text-gray-300"
-                } p-2 rounded-lg min-w-[75px] max-w-[200px] md:max-w-[250px] break-words mb-1`}
+                } p-2 rounded-lg min-w-[75px] max-w-[250px] md:max-w-[350px] break-words mb-1`}
               >
                 <p className="text-sm">
                   <span className="font-semibold">{msg.replyTo.user}: </span>
@@ -144,7 +144,7 @@ const Chat = () => {
                 msg.user === auth.currentUser.displayName
                   ? "bg-blue-500 dark:bg-blue-700 duration-100"
                   : "bg-gray-200 dark:bg-gray-700 duration-100"
-              } rounded-lg p-2 min-w-[75px] max-w-[200px] md:max-w-[250px] break-words`}
+              } rounded-lg p-2 min-w-[75px] max-w-[250px] md:max-w-[350px] break-words`}
             >
               <p
                 className={`text-lg text-left ${
