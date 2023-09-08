@@ -151,7 +151,7 @@ const ChatRooms = () => {
                 msg.user === auth.currentUser.displayName
                   ? "bg-blue-500 dark:bg-blue-700 duration-100"
                   : "bg-gray-200 dark:bg-gray-700 duration-100"
-              } rounded-lg p-2 min-w-[75px] max-w-[250px] md:max-w-[350px] break-words`}
+              } rounded-lg p-2 min-w-[75px] max-w-[250px] md:max-w-[350px] break-words mb-1`}
             >
               <p
                 className={`text-lg text-left ${
