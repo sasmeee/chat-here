@@ -131,7 +131,7 @@ const Chat = () => {
                   msg.user === auth.currentUser.displayName
                     ? "bg-gray-200 text-gray-500 duration-100 dark:bg-gray-600 dark:text-gray-300"
                     : "bg-gray-200 text-gray-500 duration-100 dark:bg-gray-600 dark:text-gray-300"
-                } p-2 rounded-lg min-w-[75px] max-w-[175px] md:max-w-[250px] break-all mb-1`}
+                } p-2 rounded-lg min-w-[75px] max-w-[200px] md:max-w-[250px] break-all mb-1`}
               >
                 <p className="text-sm">
                   <span className="font-semibold">{msg.replyTo.user}: </span>
