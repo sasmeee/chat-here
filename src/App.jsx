@@ -1,5 +1,5 @@
 import React from "react";
-import { Chat, ChatRooms, Dashboard, Home } from "./pages";
+import { Chat, ChatRooms, Dashboard, Home, NoPage } from "./pages";
 import { Route, Routes } from "react-router-dom";
 import { Navbar } from "./components";
 import { ProtectedRoutes } from "./utils";
@@ -36,6 +36,7 @@ const App = () => {
               </ProtectedRoutes>
             }
           />
+          <Route path="*" element={<NoPage />} />
         </Routes>
       </AuthContextProvider>
     </div>

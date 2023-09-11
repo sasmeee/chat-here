@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { VscSend, VscClose } from "react-icons/vsc";
 import { Link } from "react-router-dom";
 import { IoExitOutline } from "react-icons/io5";
+import { MdOutlineEmojiEmotions } from "react-icons/md";
 import {
   addDoc,
   collection,
@@ -11,11 +12,13 @@ import {
   serverTimestamp,
 } from "firebase/firestore";
 import { auth, db } from "../config/firebase";
+import { EmojiPanel } from "../components";
 
 const Chat = () => {
   const [messages, setMessages] = useState([]);
   const [replyToMessage, setReplyToMessage] = useState(null);
   const [replyMessageInput, setReplyMessageInput] = useState("");
+  const [isOpenEmojiPanel, setIsOpenEmojiPanel] = useState(false);
   const lastMessageRef = useRef(null);
   const inputRef = useRef(null);
 
@@ -45,12 +48,14 @@ const Chat = () => {
 
     if (replyMessageInput === "") return;
 
+    setIsOpenEmojiPanel(false);
+
     try {
       const messageData = {
         text: replyMessageInput,
         createdAt: serverTimestamp(),
-        user: auth.currentUser.displayName,
-        userPP: auth.currentUser.photoURL,
+        user: auth.currentUser.displayName || "Anonymous",
+        userPP: auth.currentUser.photoURL || "",
       };
 
       if (replyToMessage) {
@@ -84,6 +89,22 @@ const Chat = () => {
     const minutes = date.getMinutes().toString().padStart(2, "0");
     return `${hours}:${minutes}`;
   }
+
+  const handleEmojiClick = (e) => {
+    // console.log("test");
+    e.preventDefault();
+    setIsOpenEmojiPanel(!isOpenEmojiPanel);
+  };
+
+  const handleAddEmojiToInput = (emoji) => {
+    // Append the selected emoji to the replyMessageInput
+    setReplyMessageInput(replyMessageInput + emoji);
+  };
+
+  const handleInputFocus = () => {
+    // Close the emoji panel when the input field is focused
+    setIsOpenEmojiPanel(false);
+  };
 
   return (
     <div>
@@ -188,6 +209,12 @@ const Chat = () => {
           <Link to="/dashboard" className="dark:text-gray-400 text-gray-600">
             <IoExitOutline size={20} />
           </Link>
+          <button onClick={handleEmojiClick}>
+            <MdOutlineEmojiEmotions
+              size={20}
+              className="dark:text-gray-400 text-gray-600 cursor-pointer"
+            />
+          </button>
           <input
             ref={inputRef}
             type="text"
@@ -200,6 +227,7 @@ const Chat = () => {
             onChange={(e) => setReplyMessageInput(e.target.value)}
             value={replyMessageInput}
             onKeyDown={handleReplyMessageKeyPress}
+            onFocus={handleInputFocus}
           />
           {replyToMessage && (
             <button
@@ -219,6 +247,9 @@ const Chat = () => {
             <VscSend size={18} />
           </button>
         </form>
+        {isOpenEmojiPanel && (
+          <EmojiPanel addEmojiToInput={handleAddEmojiToInput} />
+        )}
       </div>
     </div>
   );

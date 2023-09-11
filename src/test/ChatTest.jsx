@@ -1,7 +1,10 @@
+// here is the basic template
+
 import React, { useEffect, useState, useRef } from "react";
 import { VscSend, VscClose } from "react-icons/vsc";
 import { Link } from "react-router-dom";
 import { IoExitOutline } from "react-icons/io5";
+import { MdOutlineEmojiEmotions } from "react-icons/md";
 import {
   addDoc,
   collection,
@@ -9,14 +12,11 @@ import {
   orderBy,
   query,
   serverTimestamp,
-  where,
 } from "firebase/firestore";
 import { auth, db } from "../config/firebase";
-import { getRoomID } from "./Dashboard";
-import { MdOutlineEmojiEmotions } from "react-icons/md";
 import { EmojiPanel } from "../components";
 
-const ChatRooms = () => {
+const ChatTest = () => {
   const [messages, setMessages] = useState([]);
   const [replyToMessage, setReplyToMessage] = useState(null);
   const [replyMessageInput, setReplyMessageInput] = useState("");
@@ -24,14 +24,10 @@ const ChatRooms = () => {
   const lastMessageRef = useRef(null);
   const inputRef = useRef(null);
 
-  const messagesRef = collection(db, "messages:room");
+  const messagesRef = collection(db, "messages:test");
 
   useEffect(() => {
-    const queryMessages = query(
-      messagesRef,
-      where("room", "==", getRoomID),
-      orderBy("createdAt")
-    );
+    const queryMessages = query(messagesRef, orderBy("createdAt"));
     const unsubscribe = onSnapshot(queryMessages, (snapshot) => {
       let messages = [];
       snapshot.forEach((doc) => {
@@ -62,7 +58,6 @@ const ChatRooms = () => {
         createdAt: serverTimestamp(),
         user: auth.currentUser.displayName || "Anonymous",
         userPP: auth.currentUser.photoURL || "",
-        room: getRoomID,
       };
 
       if (replyToMessage) {
@@ -262,4 +257,4 @@ const ChatRooms = () => {
   );
 };
 
-export default ChatRooms;
+export default ChatTest;
